@@ -217,10 +217,10 @@ function EditAndOrAcceptComponent({
     }
     return null;
   }
-  const header = editResponse.acceptAllowed ? "Edit/Accept" : "Edit";
-  let buttonText = "Submit";
+  const header = editResponse.acceptAllowed ? "Editar / Aceptar" : "Editar";
+  let buttonText = "Enviar";
   if (editResponse.acceptAllowed && !editResponse.editsMade) {
-    buttonText = "Accept";
+    buttonText = "Aceptar";
   }
 
   const handleReset = () => {
@@ -351,7 +351,7 @@ export function InboxItemInput({
       (!Array.isArray(change) && Array.isArray(key))
     ) {
       toast.error("Error", {
-        description: "Something went wrong",
+        description: "Ocurrió algun error",
         richColors: true,
         closeButton: true,
       });
