@@ -27,6 +27,9 @@ import naturgy_logo from "../../../assets/naturgy_logo_text-removebg.png";
 import naturgy_logo_chat from "../../../assets/naturgy.png";
 import * as perfil_image from "../../../assets/agent_perfil.jpeg";
 
+import win_logo from "../../../assets/logo_win.jpeg";
+import carla_real_state from "../../../assets/carla_real_state.jpeg";
+
 function StickyToBottomContent(props: {
   content: ReactNode;
   footer?: ReactNode;
@@ -350,7 +353,7 @@ export function Thread() {
                 /> */}
               <span className="text-xl font-semibold tracking-tight">
                 <Image
-                  src={naturgy_logo_chat}
+                  src={win_logo}
                   alt="Naturgy Logo"
                   width={100}
                   height={100}
@@ -443,14 +446,14 @@ export function Thread() {
                     <div className="flex flex-col items-center gap-3">
                       <div className="flex flex-col items-center">
                         <Image
-                          src={naturgy_logo}
+                          src={win_logo}
                           alt="Naturgy Logo"
                           width={150}
                           height={150}
                           className="mx-6"
                         />
                         <Image
-                          src={perfil_image}
+                          src={carla_real_state}
                           alt="Descripción de la imagen"
                           width={170}
                           height={170}
@@ -459,20 +462,19 @@ export function Thread() {
                       </div>
                       <div className="flex items-center gap-2 py-2 text-center">
                         <h1 className="text-2xl font-bold text-gray-800">
-                          Adriana W.S
+                          Carla W.S
                         </h1>
                         <p className="text-xl text-gray-700">Agente IA</p>
                       </div>
 
                       <div className="mx-4 mb-6 rounded-lg bg-[#004571] p-6 text-white">
                         <p className="text-md mb-2 text-center last:mb-0">
-                          Especialista de Energía en FaceApp Int. Empresa de
-                          Servicios Especiales Gestión de suministro de Gas
-                          Natural en casa
+                          Especialista de Real State en FaceApp Int. Empresa de
+                          Servicios Especiales Gestión de asistencia inmobiliaria
                         </p>
                       </div>
                       <p className="text-center">
-                        En un momento tu Agente Adriana atenderá tu
+                        En un momento tu Agente Carla atenderá tu
                         solicitud{" "}
                       </p>
                       <div>
