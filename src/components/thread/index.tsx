@@ -458,7 +458,7 @@ export function Thread() {
                         />
                       </div>
                       <div className="flex items-center gap-2 py-2 text-center">
-                        <h1 className="text-2xl font-bold text-gray-800">
+                        <h1 className="text-2xl font-bold text-[#004571]">
                           Adriana W.S
                         </h1>
                         <p className="text-xl text-gray-700">Agente IA</p>
