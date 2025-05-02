@@ -24,7 +24,7 @@ const messageTypeToLabel = (message: BaseMessage) => {
   if ("type" in message) {
     type = message.type as string;
   } else {
-    type = message._getType();
+    type = message.getType();
   }
 
   switch (type) {

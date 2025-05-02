@@ -197,6 +197,9 @@ export function Thread() {
       setFirstTokenReceived(true);
     }
 
+    console.log("last message", messages[messages.length - 1]);
+    
+
     prevMessageLength.current = messages.length;
   }, [messages]);
 
