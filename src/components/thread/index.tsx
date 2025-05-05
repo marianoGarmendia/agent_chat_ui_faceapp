@@ -32,7 +32,7 @@ import WhatsappAhare from "../icons/whatsapp";
 // import naturgy_logo_chat from "../../../assets/naturgy.png";
 // import * as perfil_image from "../../../assets/agent_perfil.jpeg";
 
-import win_logo from "../../../assets/logo_win.jpeg";
+import win_logo from "../../../assets/logo_mym.png";
 import carla_real_state from "../../../assets/carla_real_state.jpeg";
 
 function StickyToBottomContent(props: {
@@ -101,12 +101,12 @@ function ScrollToBottom(props: { className?: string }) {
 // }
 
 export function Thread() {
-  const [threadId, setThreadId] = useQueryState("threadId");
-  const [chatHistoryOpen, setChatHistoryOpen] = useQueryState(
+  const [threadId] = useQueryState("threadId");
+  const [chatHistoryOpen] = useQueryState(
     "chatHistoryOpen",
     parseAsBoolean.withDefault(false),
   );
-  const [reference, setReference] = useQueryState("reference");
+  const [reference] = useQueryState("reference");
   // const [hideToolCalls, setHideToolCalls] = useQueryState(
   //   "hideToolCalls",
   //   parseAsBoolean.withDefault(false),
@@ -120,7 +120,7 @@ export function Thread() {
   const stream = useStreamContext();
  
   const messages = stream.messages;
-  const ui = stream.values.ui;
+  
   const isLoading = stream.isLoading;
 
   const lastError = useRef<string | undefined>(undefined);
@@ -163,7 +163,7 @@ export function Thread() {
     }, 1000); // Espera de 1 segundo
 
     return () => clearTimeout(timer); // Limpieza del temporizador al desmontar
-  }, [firstMessageRef]);
+  }, [firstMessageRef ,stream]);
 
   useEffect(() => {
     if (!stream.error) {
@@ -204,7 +204,7 @@ export function Thread() {
       setFirstTokenReceived(true);
     }
 
-    console.log("ui messages", ui);
+    
     
 
     prevMessageLength.current = messages.length;
@@ -454,17 +454,11 @@ export function Thread() {
 
                 <ScrollToBottom className="animate-in fade-in-0 zoom-in-95 absolute bottom-full left-1/2 mb-4 -translate-x-1/2" />
 
-                {!showinputField ? (
+                {!showinputField  ? (
                   <div className="top-0 flex flex-col items-center gap-4 bg-white">
                     <div className="flex flex-col items-center gap-3">
                       <div className="flex flex-col items-center">
-                        <Image
-                          src={win_logo}
-                          alt="Naturgy Logo"
-                          width={150}
-                          height={150}
-                          className="mx-6"
-                        />
+                       
                         <Image
                           src={carla_real_state}
                           alt="Descripción de la imagen"
@@ -480,12 +474,11 @@ export function Thread() {
                         <p className="text-xl text-gray-700">Agente IA</p>
                       </div>
 
-                      <div className="mx-4 mb-6 rounded-lg bg-[#004571] p-6 text-white">
-                        <p className="text-md mb-2 text-center last:mb-0">
-                          Especialista de Real State en FaceApp Int. Empresa de
-                          Servicios Especiales Gestión de asistencia
-                          inmobiliaria
+                      <div className="mx-4 mb-6 rounded-lg bg-[#fef7ef] p-6  text-center">
+                        <p className="text-md mb-2 text-center last:mb-0 font-bold">
+                          Especialista de Real State 
                         </p>
+                        <p>para inmobiliaria MYM</p>
                       </div>
                       <p className="text-center">
                         En un momento tu Agente Carla atenderá tu solicitud{" "}
