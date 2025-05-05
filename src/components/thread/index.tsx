@@ -1,3 +1,5 @@
+"use client";
+
 import { v4 as uuidv4 } from "uuid";
 import { ReactNode, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
@@ -6,8 +8,11 @@ import { useStreamContext } from "@/providers/Stream";
 import { useState, FormEvent } from "react";
 import { Button } from "../ui/button";
 import { Checkpoint, Message } from "@langchain/langgraph-sdk";
+
+
 import { AssistantMessage, AssistantMessageLoading } from "./messages/ai";
 import { HumanMessage } from "./messages/human";
+
 import {
   DO_NOT_RENDER_ID_PREFIX,
   ensureToolCallsHaveResponses,
@@ -23,9 +28,9 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 import WhatsappAhare from "../icons/whatsapp";
 
-import naturgy_logo from "../../../assets/naturgy_logo_text-removebg.png";
-import naturgy_logo_chat from "../../../assets/naturgy.png";
-import * as perfil_image from "../../../assets/agent_perfil.jpeg";
+// import naturgy_logo from "../../../assets/naturgy_logo_text-removebg.png";
+// import naturgy_logo_chat from "../../../assets/naturgy.png";
+// import * as perfil_image from "../../../assets/agent_perfil.jpeg";
 
 import win_logo from "../../../assets/logo_win.jpeg";
 import carla_real_state from "../../../assets/carla_real_state.jpeg";
@@ -113,7 +118,9 @@ export function Thread() {
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
   const firstMessageRef = useRef(0);
   const stream = useStreamContext();
+ 
   const messages = stream.messages;
+  const ui = stream.values.ui;
   const isLoading = stream.isLoading;
 
   const lastError = useRef<string | undefined>(undefined);
@@ -153,7 +160,7 @@ export function Thread() {
       firstMessageRef.current = 1;
       setInput("");
       setShowinputField(true);
-    }, 10000); // Espera de 1 segundo
+    }, 1000); // Espera de 1 segundo
 
     return () => clearTimeout(timer); // Limpieza del temporizador al desmontar
   }, [firstMessageRef]);
@@ -197,7 +204,7 @@ export function Thread() {
       setFirstTokenReceived(true);
     }
 
-    console.log("last message", messages[messages.length - 1]);
+    console.log("ui messages", ui);
     
 
     prevMessageLength.current = messages.length;
@@ -407,12 +414,15 @@ export function Thread() {
                         isLoading={isLoading}
                       />
                     ) : (
-                      <AssistantMessage
-                        key={message.id || `${message.type}-${index}`}
-                        message={message}
-                        isLoading={isLoading}
-                        handleRegenerate={handleRegenerate}
-                      />
+                     
+                        <AssistantMessage
+                          key={message.id || `${message.type}-${index}`}
+                          message={message}
+                          isLoading={isLoading}
+                          handleRegenerate={handleRegenerate}
+                        />
+                       
+                      
                     ),
                   )}
                 {/* Special rendering case where there are no AI/tool messages, but there is an interrupt.
@@ -473,12 +483,12 @@ export function Thread() {
                       <div className="mx-4 mb-6 rounded-lg bg-[#004571] p-6 text-white">
                         <p className="text-md mb-2 text-center last:mb-0">
                           Especialista de Real State en FaceApp Int. Empresa de
-                          Servicios Especiales Gestión de asistencia inmobiliaria
+                          Servicios Especiales Gestión de asistencia
+                          inmobiliaria
                         </p>
                       </div>
                       <p className="text-center">
-                        En un momento tu Agente Carla atenderá tu
-                        solicitud{" "}
+                        En un momento tu Agente Carla atenderá tu solicitud{" "}
                       </p>
                       <div>
                         <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -529,7 +539,7 @@ export function Thread() {
                         ) : (
                           <Button
                             type="submit"
-                            className="shadow-md transition-all bg-[#e57200]"
+                            className="bg-[#e57200] shadow-md transition-all"
                             disabled={isLoading || !input.trim()}
                           >
                             Enviar

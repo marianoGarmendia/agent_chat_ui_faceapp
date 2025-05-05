@@ -1,10 +1,10 @@
 import { parsePartialJson } from "@langchain/core/output_parsers";
 import { useStreamContext } from "@/providers/Stream";
-import { AIMessage, Checkpoint, Message } from "@langchain/langgraph-sdk";
+import { AIMessage, Checkpoint, Message , } from "@langchain/langgraph-sdk";
 import { getContentString } from "../utils";
 import { BranchSwitcher, CommandBar } from "./shared";
 import { MarkdownText } from "../markdown-text";
-import { LoadExternalComponent } from "@langchain/langgraph-sdk/react-ui";
+import { LoadExternalComponent, UIMessage } from "@langchain/langgraph-sdk/react-ui";
 import { cn } from "@/lib/utils";
 import { ToolCalls, ToolResult } from "./tool-calls";
 import { MessageContentComplex } from "@langchain/core/messages";
@@ -22,11 +22,25 @@ function CustomComponent({
   message: Message;
   thread: ReturnType<typeof useStreamContext>;
 }) {
+  console.log("message", message);
+  
+  
+  
   const { values } = useStreamContext();
   const customComponents = values.ui?.filter(
-    (ui) => ui.metadata?.message_id === message.id,
-  );
+    
 
+    (ui) =>{ 
+      console.log("ui metadata id", ui.metadata?.message_id);
+      console.log("message", message.id);
+    
+      
+     return  ui.metadata?.message_id === message.id
+    }
+  );
+  
+  console.log("customComponents", customComponents);
+  
   if (!customComponents?.length) return null;
   return (
     <Fragment key={message.id}>
@@ -34,7 +48,7 @@ function CustomComponent({
         <LoadExternalComponent
           key={customComponent.id}
           stream={thread}
-          message={customComponent}
+          message={customComponent }
           meta={{ ui: customComponent }}
         />
       ))}
