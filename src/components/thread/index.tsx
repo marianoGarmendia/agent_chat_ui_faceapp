@@ -153,7 +153,7 @@ export function Thread() {
     }, 10000); // Espera de 1 segundo
 
     return () => clearTimeout(timer); // Limpieza del temporizador al desmontar
-  }, [firstMessageRef]);
+  }, [firstMessageRef, stream]);
 
   useEffect(() => {
     if (!stream.error) {
@@ -350,7 +350,7 @@ export function Thread() {
                 /> */}
               <span className="text-xl font-semibold tracking-tight">
                 <Image
-                  src={naturgy_logo_chat}
+                  src={naturgy_logo}
                   alt="Naturgy Logo"
                   width={100}
                   height={100}
@@ -466,9 +466,7 @@ export function Thread() {
 
                       <div className="mx-4 mb-6 rounded-lg bg-[#004571] p-6 text-white">
                         <p className="text-md mb-2 text-center last:mb-0">
-                          Especialista de Energía en FaceApp Int. Empresa de
-                          Servicios Especiales Gestión de suministro de Gas
-                          Natural en casa
+                        Especialista de Energía en FaceApp, en el suministro de gas natural en casa.
                         </p>
                       </div>
                       <p className="text-center">
