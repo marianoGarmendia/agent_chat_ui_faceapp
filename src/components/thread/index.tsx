@@ -124,6 +124,8 @@ export function Thread() {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (firstMessageRef.current !== 0) return;
+      if(threadId) return;
+
 
       const newHumanMessage: Message = {
         id: `do-not-render-${uuidv4()}`,
@@ -153,7 +155,7 @@ export function Thread() {
     }, 10000); // Espera de 1 segundo
 
     return () => clearTimeout(timer); // Limpieza del temporizador al desmontar
-  }, [firstMessageRef, stream]);
+  }, [firstMessageRef, stream, threadId]);
 
   useEffect(() => {
     if (!stream.error) {
@@ -438,7 +440,7 @@ export function Thread() {
 
                 <ScrollToBottom className="animate-in fade-in-0 zoom-in-95 absolute bottom-full left-1/2 mb-4 -translate-x-1/2" />
 
-                {!showinputField ? (
+                {!showinputField && !threadId ? (
                   <div className="top-0 flex flex-col items-center gap-4 bg-white">
                     <div className="flex flex-col items-center gap-3">
                       <div className="flex flex-col items-center">
