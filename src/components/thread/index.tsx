@@ -93,12 +93,13 @@ function ScrollToBottom(props: { className?: string }) {
 // }
 
 export function Thread() {
-  const [threadId, setThreadId] = useQueryState("threadId");
+  const [threadId] = useQueryState("threadId");
+  const [queryThreadId] = useQueryState("threadId");
   const [chatHistoryOpen, setChatHistoryOpen] = useQueryState(
     "chatHistoryOpen",
     parseAsBoolean.withDefault(false),
   );
-  const [reference, setReference] = useQueryState("reference");
+  const [reference] = useQueryState("reference");
   // const [hideToolCalls, setHideToolCalls] = useQueryState(
   //   "hideToolCalls",
   //   parseAsBoolean.withDefault(false),
@@ -114,6 +115,15 @@ export function Thread() {
   const isLoading = stream.isLoading;
 
   const lastError = useRef<string | undefined>(undefined);
+  const threadIdQuery = queryThreadId || localStorage.getItem("lastThreadId");
+
+  useEffect(() => {
+    
+    if (threadId) {
+      localStorage.setItem("lastThreadId", threadId);
+    }
+  }, [threadId]);
+
 
   useEffect(() => {
     // console.log("hide tool calls", hideToolCalls);
@@ -440,7 +450,7 @@ export function Thread() {
 
                 <ScrollToBottom className="animate-in fade-in-0 zoom-in-95 absolute bottom-full left-1/2 mb-4 -translate-x-1/2" />
 
-                {!showinputField && !threadId ? (
+                {!showinputField && !threadId && !threadIdQuery ? (
                   <div className="top-0 flex flex-col items-center gap-4 bg-white">
                     <div className="flex flex-col items-center gap-3">
                       <div className="flex flex-col items-center">
