@@ -24,8 +24,9 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import WhatsappAhare from "../icons/whatsapp";
 
 import naturgy_logo from "../../../assets/naturgy_logo_text-removebg.png";
-import naturgy_logo_chat from "../../../assets/naturgy.png";
+// import naturgy_logo_chat from "../../../assets/naturgy.png";
 import * as perfil_image from "../../../assets/agent_perfil.jpeg";
+import { set } from "lodash";
 
 function StickyToBottomContent(props: {
   content: ReactNode;
@@ -94,7 +95,7 @@ function ScrollToBottom(props: { className?: string }) {
 
 export function Thread() {
   const [threadId] = useQueryState("threadId");
-  const [queryThreadId] = useQueryState("threadId");
+  const [queryThreadId, setQueryThreadId] = useState("");
   const [chatHistoryOpen, setChatHistoryOpen] = useQueryState(
     "chatHistoryOpen",
     parseAsBoolean.withDefault(false),
@@ -118,11 +119,9 @@ export function Thread() {
   const threadIdQuery = queryThreadId || localStorage.getItem("lastThreadId");
 
   useEffect(() => {
-    
-    if (threadId) {
-      localStorage.setItem("lastThreadId", threadId);
-    }
-  }, [threadId]);
+    const id = window.threadId ?? ""
+    setQueryThreadId(id);
+  }, [messages]);
 
 
   useEffect(() => {

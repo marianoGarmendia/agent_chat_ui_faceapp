@@ -23,6 +23,12 @@ import { getApiKey } from "@/lib/api-key";
 import { useThreads } from "./Thread";
 import { toast } from "sonner";
 
+declare global {
+  interface Window {
+    threadId?: string;
+  }
+}
+
 export type StateType = { messages: Message[]; ui?: UIMessage[] };
 
 const useTypedStream = useStream<
@@ -98,6 +104,15 @@ const StreamSession = ({
   });
 
   console.log("threadId en Stream.tsx", threadId);
+  
+  
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        window.threadId = threadId ?? undefined; // lo guardás en el objeto global window
+      }
+    }, [threadId]);
+  
+ 
   
 
   useEffect(() => {
